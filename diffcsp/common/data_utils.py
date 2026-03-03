@@ -689,7 +689,7 @@ def radius_graph_pbc(pos, lengths, angles, natoms, radius, max_num_neighbors_thr
     # Remove pairs that are too far apart
     
     
-    radius_real = (min_dist.min(dim=-1)[0] + 0.01)#.clamp(max=radius)
+    radius_real = (min_dist.min(dim=-1)[0] + 0.01).clamp(min=3.0, max=radius) 
     
     radius_real = torch.repeat_interleave(radius_real, num_atoms_per_image_sqr * num_cells)
 
